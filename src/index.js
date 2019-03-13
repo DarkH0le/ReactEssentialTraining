@@ -1,6 +1,6 @@
 //Import libraries
 
-import React from 'react';
+import React , {Component} from 'react';
 import ReactDOM  from 'react-dom';
 
 //Set a state to skyday component
@@ -16,14 +16,15 @@ let skyData = {
 //Create SkyDayComponent
 
 
-class SkyDayCounter extends React.Component{
+class SkyDayCounter extends Component{
     render(){
+        const {total,powder,backcontry,goal} = this.props;
         return(
             <section>Sky days
-                <div><p>Total days: {this.props.total}</p></div>
-                <div><p>Powder day: {this.props.powder}</p></div>
-                <div><p>Backcontry days: {this.props.backcontry}</p></div>
-                <div><p>Goal: {this.props.goal}</p></div>
+                <div><p>Total days: {total}</p></div>
+                <div><p>Powder day: {powder}</p></div>
+                <div><p>Backcontry days: {backcontry}</p></div>
+                <div><p>Goal: {goal}</p></div>
             </section> 
         );
     };
