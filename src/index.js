@@ -10,8 +10,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-//Create a component
+//Set a list of "Books"
 
+let bookList = [
+    {
+        "title": "IT",
+        "by": "Sthepen",
+        "pages": 2334
+    },
+    {
+        "title": "Harry Potter",
+        "by": "JK",
+        "pages": 54
+    },
+    {
+        "title": "Matilda",
+        "by": "UKNOW",
+        "pages": 234
+    }
+];
+
+
+//Create a component
 const Book = ({title,author,pages}) => {
     return(
         <div>
@@ -23,16 +43,18 @@ const Book = ({title,author,pages}) => {
 };
 
 //Create a compose component, this "library" component is going to be made by "book"s components
+//Note: Keys used within arrays should be unique among their siblings. However they don’t need to be globally unique. We can use the same keys when we produce two different arrays
 
-const Library = () => {
+
+const Library = ({bookList}) => {
     return (
         <div>
-            <Book title="IT" author="Sthepen King" pages="503"/>
-            <Book title="Hunger Games" author="Carolina Vega" pages="233"/>
-            <Book title="Harry Potter" author="J.K Rowling" pages="307"/>
+            {bookList.map((book , i) => {
+                            return (<Book key={i} title={book.title} author={book.author} pages={book.pages}/>);
+                         })}
         </div>
     );
 };
 
-ReactDOM.render(<Library/>,document.querySelector('#root'));
+ReactDOM.render(<Library bookList={bookList}/>,document.querySelector('#root'));
 
