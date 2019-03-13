@@ -12,23 +12,23 @@ let skyData = {
     goal:100
 };
 
+//Setting up some functions to display goal progress
+const getPercent = (decimal) => {return (decimal * 100 + '%')};
+const calcGoalProgress = (total,goal) => {
+    return getPercent(total/goal);
+};
 
-//Create SkyDayComponent
+//Create a component as a function
 
-
-class SkyDayCounter extends Component{
-    render(){
-        const {total,powder,backcontry,goal} = this.props;
-        return(
-            <section>Sky days
-                <div><p>Total days: {total}</p></div>
-                <div><p>Powder day: {powder}</p></div>
-                <div><p>Backcontry days: {backcontry}</p></div>
-                <div><p>Goal: {goal}</p></div>
-            </section> 
-        );
-    };
-}
-
+const SkyDayCounter = ({total,powder,backcontry,goal}) =>{
+    return(
+        <section>Sky days
+            <div><p>Total days: {total}</p></div>
+            <div><p>Powder day: {powder}</p></div>
+            <div><p>Backcontry days: {backcontry}</p></div>
+            <div><p>Goal: {calcGoalProgress(total,goal)}</p></div>
+        </section> 
+    );
+};
 //Render the component
 ReactDOM.render(<SkyDayCounter total={skyData.total} powder={skyData.powder} backcontry={skyData.backcontry} goal={skyData.goal}/>,document.querySelector('#root'));
