@@ -44,10 +44,19 @@ const Book = ({title,author,pages,freeBookMark}) => {
 class Library extends Component {
 
     //Setting up the state, same as above
-    state = {"open":true,"freeBookMark":false, "hiring":false}
+    state = {"open":true,
+            "freeBookMark":false,
+            "hiring":false,
+            "loading":false,
+            "data":[]
+    }
     
     componentDidMount(){
-        console.log("The component is now monted");
+        console.log("The component is now monted, great place to fetch data!");
+        this.setState({"loading":true});
+        fetch("https://hplussport.com/api/products/order/price/sort/asc/qty/1")
+            .then(data => data.json())
+            .then(data =>this.setState({"data":data,"loading":false}))
     }
 
     componentDidUpdate(){
@@ -62,10 +71,22 @@ class Library extends Component {
     }
 
     render(){
-        console.log(this.state);
+        console.log("In render method of Library Component");
+        // console.log(this.state);
         const {bookList} = this.props
         return (
             <div>
+                {this.state.loading
+                    ? <h3>Feaching data...</h3>
+                    : <div>
+                          {this.state.data.map(product =>{
+                                               return(<div>
+                                                   <h4>{product.name}</h4>
+                                                   <p>{product.description}</p>
+                                                   <img src={product.image} alt={product.description} height={100}/>
+                                               </div>)})}
+                                           </div>
+                }
                 <h1> The library is {this.state.open ? 'open':'closed'}!!!</h1>
                 {bookList.map((book , i) => {
                                 return (<Book key={i} title={book.title} author={book.author} pages={book.pages} freeBookMark={this.state.freeBookMark}/>);
