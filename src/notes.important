@@ -1,0 +1,17 @@
+NOTES!!!
+
+What are the main phases of the React life cycle component?
+
+    - Mounting
+    - Updating
+    - Unmounting
+
+The component life cycle methods are only avaliable when using a class component, you cant use it with function components
+
+The only requiered method of the component lifecycle is render, whenever the the props or state of the app changes, the render method will be called.
+
+Constructor:
+    - Another method is the constructor, it will be called BEFORE the component is mounted, great place to initialize state.
+    - You can also bind eventhandler methods in the constructor
+    - diagram:  http://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/
+

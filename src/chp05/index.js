@@ -1,4 +1,4 @@
-//Component life cycle methods
+//Intro to state and more conditional rendering
 
 //Import dependecies
 
@@ -43,17 +43,15 @@ const Book = ({title,author,pages,freeBookMark}) => {
 
 class Library extends Component {
 
+    /* constructor(props){
+        super(props)
+        this.state = {
+            "open" : true
+        }
+        }*/
+
     //Setting up the state, same as above
     state = {"open":true,"freeBookMark":false, "hiring":false}
-    
-    componentDidMount(){
-        console.log("The component is now monted");
-    }
-
-    componentDidUpdate(){
-        console.log("The component just updated!");
-    }
-
 
     toggleOpenClosed = () => {
         this.setState({
@@ -70,7 +68,7 @@ class Library extends Component {
                 {bookList.map((book , i) => {
                                 return (<Book key={i} title={book.title} author={book.author} pages={book.pages} freeBookMark={this.state.freeBookMark}/>);
                 })}
-                <button onClick={this.toggleOpenClosed}>Change!</button>
+                <button onClick={this.toggleOpenClosed}></button>
             </div>
         );
       
