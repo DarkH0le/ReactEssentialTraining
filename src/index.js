@@ -1,4 +1,4 @@
-//Intro to state
+//Intro to state and more conditional rendering
 
 //Import dependecies
 
@@ -51,7 +51,7 @@ class Library extends Component {
         }*/
 
     //Setting up the state, same as above
-    state = {"open":true,"freeBookMark":false}
+    state = {"open":true,"freeBookMark":false, "hiring":false}
 
     toggleOpenClosed = () => {
         this.setState({
