@@ -79,8 +79,8 @@ class Library extends Component {
                 {this.state.loading
                     ? <h3>Feaching data...</h3>
                     : <div>
-                          {this.state.data.map(product =>{
-                                               return(<div>
+                          {this.state.data.map((product , i) => {
+                                               return(<div key={i}>
                                                    <h4>{product.name}</h4>
                                                    <p>{product.description}</p>
                                                    <img src={product.image} alt={product.description} height={100}/>
