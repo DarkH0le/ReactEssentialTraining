@@ -1,102 +1,41 @@
-//Component life cycle methods
+//Sample of form usage: use the color picked from a form selected by the user
 
 //Import dependecies
-
-import React , {Component} from 'react';
+import React ,{Component} from 'react';
 import ReactDOM from 'react-dom';
 
-//Set a list of "Books"
+//Creating the component
 
-let bookList = [
-    {
-        "title": "IT",
-        "by": "Sthepen",
-        "pages": 234
-    },
-    {
-        "title": "Harry Potter",
-        "by": "JK",
-        "pages": 54
-    },
-    {
-        "title": "Matilda",
-        "by": "UKNOW",
-        "pages": 234
-    }
-];
+class FavoriteColor extends Component {
 
+    //Init the state
 
-//Create a component
-const Book = ({title,author,pages,freeBookMark}) => {
-    return(
-        <div>
-            <h2>{title}</h2>
-            <p>by: {author}</p>
-            <p>Pages: {pages}</p>
-            <p>Free? {freeBookMark ? 'YES!' : 'NO'}</p>
-        </div>
-    );
-};
+    state = {"color":""}
 
-//Create a ES6 class and give it a state using this.state
-//Note: Keys used within arrays should be unique among their siblings. However they don’t need to be globally unique. We can use the same keys when we produce two different arrays
-
-class Library extends Component {
-
-    //Setting up the state, same as above
-    state = {"open":true,
-            "freeBookMark":false,
-            "hiring":false,
-            "loading":false,
-            "data":[]
+    //Update the color
+    colorPicker = ({target:{value}}) => {
+        this.setState({"color":value});
     }
     
-    componentDidMount(){
-        console.log("The component is now monted, great place to fetch data!");
-        this.setState({"loading":true});
-        fetch("https://hplussport.com/api/products/order/price/sort/asc/qty/1")
-            .then(data => data.json())
-            .then(data =>this.setState({"data":data,"loading":false}))
+    //Submit action
+    submit = (e) =>{
+        e.preventDefault();
+        console.log(this.state.color);
     }
-
-    componentDidUpdate(){
-        console.log("The component just updated!");
-    }
-
-
-    toggleOpenClosed = () => {
-        this.setState({
-            "open" : !this.state.open
-        });
-    }
-
     render(){
-        console.log("In render method of Library Component");
-        // console.log(this.state);
-        const {bookList} = this.props
-        return (
-            <div>
-                {this.state.loading
-                    ? <h3>Feaching data...</h3>
-                    : <div>
-                          {this.state.data.map((product , i) => {
-                                               return(<div key={i}>
-                                                   <h4>{product.name}</h4>
-                                                   <p>{product.description}</p>
-                                                   <img src={product.image} alt={product.description} height={100}/>
-                                               </div>)})}
-                                           </div>
-                }
-                <h1> The library is {this.state.open ? 'open':'closed'}!!!</h1>
-                {bookList.map((book , i) => {
-                                return (<Book key={i} title={book.title} author={book.author} pages={book.pages} freeBookMark={this.state.freeBookMark}/>);
-                })}
-                <button onClick={this.toggleOpenClosed}>Change!</button>
+        return(
+            <div className="colorPicker">
+                {/* Not sure where the onSubmit comes from :D */}
+                <form onSubmit={this.submit}>
+                    <label>Pick a color: 
+                        <input type="color" onChange={this.colorPicker}/>
+                    </label>
+                    <button type="submit">Click Me!</button>
+                </form>
             </div>
-        );
-      
-    }
+        )//End return
+    }//End render
 }
 
-ReactDOM.render(<Library bookList={bookList}/>,document.querySelector('#root'));
 
+ReactDOM.render(<FavoriteColor/>,document.querySelector("#root"));
